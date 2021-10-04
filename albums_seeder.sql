@@ -38,3 +38,11 @@ INSERT INTO albums (`artist`, `name`, `release_date`, `genre`, `sales`) VALUES
 ('Guns N'' Roses',  'Appetite for Destruction', 1987,   'Hard rock',    21.6);
 
 SELECT * FROM albums;
+
+# better practice:
+SELECT name, id, artist FROM albums
+WHERE id = 3;
+
+# can be WHERE id > < or between 10 and 15 for example. <, >, between number and number or WHERE NAME = 'Bad', WHERE name LIKE %e% is gonna look for 'e' WHERE release_date < 1980 for example to find date
+
+SELECT 'Migrating albums table' AS Migration;
