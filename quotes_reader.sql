@@ -12,7 +12,7 @@ CREATE TABLE quotes (
 DESCRIBE quotes;
 
 INSERT INTO quotes ( author_last_name, content)
-VALUES ( Reich, 'Do your best!!');
+VALUES ('Reich', 'Do your best!!');
 SELECT * FROM quotes;
 
 # INSERT INTO quotes (author_first_name, author_last_name, content) VALUES ('Casey', 'Edwards', 'To be or not to be.');
