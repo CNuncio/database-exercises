@@ -1,48 +1,30 @@
-CREATE DATABASE join_test_db;
+USE employees;
 
-USE join_test_db;
+SELECT dept_name AS 'Department Name', CONCAT(first_name, ' ', last_name) AS 'Department Manager' FROM departments d JOIN dept_manager dm ON d.dept_no = dm.dept_no JOIN employees e ON dm.emp_no = e.emp_no WHERE to_date >= NOW() ORDER BY dept_name;
 
-CREATE TABLE roles (
-                       id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                       name VARCHAR(100) NOT NULL,
-                       PRIMARY KEY (id)
-);
+SELECT d.dept_name
+           AS 'Department Name', CONCAT(e.first_name, ' ', e.last_name)
+           AS 'Department Manager'
+FROM employees e
+         JOIN dept_manager dm
+              ON e.emp_no = dm.emp_no
+         JOIN departments d
+              ON dm.dept_no = d.dept_no
+WHERE dm.to_date
+    LIKE '9%'
+  AND e.gender = 'F'
+ORDER BY d.dept_name;
 
-CREATE TABLE users (
-                       id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                       name VARCHAR(100) NOT NULL,
-                       email VARCHAR(100) NOT NULL,
-                       role_id INT UNSIGNED DEFAULT NULL,
-                       PRIMARY KEY (id),
-                       FOREIGN KEY (role_id) REFERENCES roles (id)
-);
+SELECT title, COUNT(title)
+    FROM titles t JOIN dept_emp de
+        ON t.emp_no = de.emp_no JOIN departments d
+        ON de.dept_no = d.dept_no
+WHERE d.dept_name = 'Customer Service'
+    AND t.to_date = '9999-01-01'
+GROUP BY t.title;
 
-INSERT INTO roles (name) VALUES ('admin');
-INSERT INTO roles (name) VALUES ('author');
-INSERT INTO roles (name) VALUES ('reviewer');
-INSERT INTO roles (name) VALUES ('commenter');
-
-INSERT INTO users (name, email, role_id) VALUES
-('bob', 'bob@example.com', 1),
-('joe', 'joe@example.com', 2),
-('sally', 'sally@example.com', 3),
-('adam', 'adam@example.com', 3),
-('jane', 'jane@example.com', null),
-('mike', 'mike@example.com', null);
-
-INSERT INTO users (name, email, role_id) VALUES
-('sam', 'sam@example.com', 2),
-('andy', 'andy@example.com', 2),
-('jenn', 'jenn@example.com', 2),
-('steve', 'steve@example.com', null);
-
-
-SELECT * FROM roles;
-
-# SELECT users.name, roles.name FROM roles JOIN users ON roles.id = users.role_id;
-
-SELECT users.name, roles.name FROM users LEFT JOIN roles ON users.role_id = users.role_id;
-
-SELECT users.name, roles.name FROM users RIGHT JOIN roles ON users.role_id = roles.id;
-
-
+#or select title as 'title', count(t.emp_no) as 'Total' from titles as t
+#inner join dept_emp as de on t.emp_no = de.emp_no
+  #  inner join departments as d on d.dept_no = de.dept_no
+#where d.dept_name = 'Customer Service' and de.to_date = '9999-01-01' and t.to_date = '9999-01-01'
+#group by title;
