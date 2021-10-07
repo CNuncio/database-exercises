@@ -31,10 +31,10 @@ INSERT INTO users (name, email, role_id) VALUES
 ('mike', 'mike@example.com', null);
 
 INSERT INTO users (name, email, role_id) VALUES
-('sam', 'bob@example.com', 2),
-('andy', 'joe@example.com', 2),
-('jenn', 'sally@example.com', 2),
-('steve', 'adam@example.com', null);
+('sam', 'sam@example.com', 2),
+('andy', 'andy@example.com', 2),
+('jenn', 'jenn@example.com', 2),
+('steve', 'steve@example.com', null);
 
 
 SELECT * FROM roles;
@@ -44,3 +44,5 @@ SELECT * FROM roles;
 SELECT users.name, roles.name FROM users LEFT JOIN roles ON users.role_id = users.role_id;
 
 SELECT users.name, roles.name FROM users RIGHT JOIN roles ON users.role_id = roles.id;
+
+
