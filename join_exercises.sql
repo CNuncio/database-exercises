@@ -28,3 +28,4 @@ GROUP BY t.title;
   #  inner join departments as d on d.dept_no = de.dept_no
 #where d.dept_name = 'Customer Service' and de.to_date = '9999-01-01' and t.to_date = '9999-01-01'
 #group by title;
+
